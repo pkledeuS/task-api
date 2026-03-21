@@ -1,4 +1,4 @@
-- Este es un proyecto el cual tiene como propósito crear un CRUD funcional a través de endpoints de FastAPI y actualmente funcionando con un almacenamiento a través de un arreglo.
+Este es un proyecto el cual tiene como propósito crear un CRUD funcional a través de endpoints de FastAPI y actualmente funcionando con un almacenamiento a través de un arreglo.
 
 - Para poder instalarlo debes tener Python instalado en tu sistema
 - Debes crear tu ambiente virtual 'python -m venv venv'
