@@ -45,7 +45,7 @@ async def crear_usuario(usuario: UsuarioCreate, db: Session = Depends(database.g
         raise HTTPException(status_code=400, detail="El correo ya está registado")
     return crud.create_usuario(db, usuario)
     
-@app.post("/Usuario/")
+@app.post("/usuario/")
 async def login_usuario(credenciales: UsuarioLogin, db: Session = Depends(database.get_db)):
     usuario_existe = crud.get_usuario_by_email(db, credenciales.email)
     if not usuario_existe:
