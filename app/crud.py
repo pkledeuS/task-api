@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from app import models
+from app import models, schemas
+from app.auth import hash_password
 
 def get_tareas(db: Session):
     return db.query(models.Tarea).all()
@@ -26,3 +27,14 @@ def delete_tarea(db: Session, id: int):
     db.delete(tarea_a_eliminar)
     db.commit()
     return tarea_a_eliminar
+
+def create_usuario(db: Session, usuario: schemas.UsuarioCreate):
+    pass_hasheada = hash_password(usuario.contraseña)
+    nuevo_usuario = models.Usuario(email=usuario.email, hashed_password=pass_hasheada)
+    db.add(nuevo_usuario)
+    db.commit()
+    db.refresh(nuevo_usuario)
+    return nuevo_usuario
+
+def get_usuario_by_email (db: Session, email: str):
+    return db.query(models.Usuario).filter(models.Usuario.email == email).first()

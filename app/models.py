@@ -12,3 +12,11 @@ class Tarea(Base):
     fecha: Mapped [datetime.date] = mapped_column(Date)
     hora: Mapped [datetime.time] = mapped_column(Time)
     termino: Mapped [bool] = mapped_column(Boolean, default=False)
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    email: Mapped[str] = mapped_column(String(100), unique=True)
+    hashed_password: Mapped[str] = mapped_column(String(200), nullable=False)
+    activo: Mapped[bool] = mapped_column(Boolean, default=True)
