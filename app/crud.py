@@ -2,14 +2,14 @@ from sqlalchemy.orm import Session
 from app import models, schemas
 from app.auth import hash_password
 
-def get_tareas(db: Session):
-    return db.query(models.Tarea).all()
+def get_tareas(db: Session, id: int):
+    return db.query(models.Tarea).filter(models.Tarea.usuario_id == id).all()
 
 def get_tarea(db:Session, id: int):
     return db.query(models.Tarea).filter(models.Tarea.id == id).first()
 
-def create_tarea(db:Session, tarea: models.Tarea):
-    nueva_tarea = models.Tarea(**tarea.model_dump())
+def create_tarea(db:Session, tarea: models.Tarea, id_usuario: int):
+    nueva_tarea = models.Tarea(usuario_id = id_usuario, **tarea.model_dump())
     db.add(nueva_tarea)
     db.commit()
     db.refresh(nueva_tarea)

@@ -10,6 +10,7 @@ class TareaBase(BaseModel):
 
 class TareaResponse(TareaBase):
     id: int
+    usuario_id: int
 
 class UsuarioCreate(BaseModel):
     email: str

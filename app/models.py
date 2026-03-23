@@ -1,6 +1,6 @@
 import datetime
 from app.database import Base
-from sqlalchemy import Integer, String, Date, Time, Boolean
+from sqlalchemy import Integer, String, Date, Time, Boolean, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
 class Tarea(Base):
@@ -12,6 +12,7 @@ class Tarea(Base):
     fecha: Mapped [datetime.date] = mapped_column(Date)
     hora: Mapped [datetime.time] = mapped_column(Time)
     termino: Mapped [bool] = mapped_column(Boolean, default=False)
+    usuario_id: Mapped [int] = mapped_column(Integer, ForeignKey("usuarios.id"), nullable=False)
 
 class Usuario(Base):
     __tablename__ = "usuarios"
