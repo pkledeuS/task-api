@@ -4,9 +4,23 @@ from app.database import engine
 from app import models, crud, database, auth
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 
 models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
+
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.post("/tarea/", response_model=TareaResponse)
 async def crear_tarea (tarea: TareaBase, db: Session = Depends(database.get_db), current_user: str = Depends(auth.get_current_user)):
