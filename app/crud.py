@@ -15,11 +15,12 @@ def create_tarea(db:Session, tarea: models.Tarea, id_usuario: int):
     db.refresh(nueva_tarea)
     return nueva_tarea 
 
-def update_tarea(db:Session, id: int, tarea: models.Tarea):
+def update_tarea(db:Session, id: int, tarea: schemas.TareaBase):
     tarea_a_modificar = db.query(models.Tarea).filter(models.Tarea.id == id).first()
     for key, value in tarea.model_dump().items():
         setattr(tarea_a_modificar, key, value)
     db.commit()
+    db.refresh(tarea_a_modificar)
     return tarea_a_modificar 
 
 def delete_tarea(db: Session, id: int):

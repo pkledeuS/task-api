@@ -46,16 +46,16 @@ async def consultar_tareas_con_id(id: int, db: Session = Depends(database.get_db
 
 @app.put("/tarea/{id}")
 async def modificar_tarea (id: int, tarea: TareaBase, db: Session = Depends(database.get_db), current_user: str = Depends(auth.get_current_user)):
-    tarea = crud.get_tarea(db, id)
+    tarea_db = crud.get_tarea(db, id)
     usuario = crud.get_usuario_by_email(db, current_user)
-    if not tarea:
+    if not tarea_db:
         raise HTTPException(status_code=404, detail="Tarea no encontrada")
     if not usuario:
         raise HTTPException(status_code=401, detail="Usuario no autenticado")
-    if tarea.usuario_id != usuario.id:
+    if tarea_db.usuario_id != usuario.id:
         raise HTTPException(status_code=403, detail="No tiene permisos")
-    tarea = crud.update_tarea(db, id, tarea)
-    return tarea
+    tarea_actualizada = crud.update_tarea(db, id, tarea)
+    return tarea_actualizada
     
 @app.delete("/tarea/{id}")
 async def eliminar_tarea (id: int, db: Session = Depends(database.get_db), current_user: str = Depends(auth.get_current_user)):
