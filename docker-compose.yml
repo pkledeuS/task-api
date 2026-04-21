@@ -17,7 +17,8 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/task_api
       SECRET_KEY: ${SECRET_KEY}
