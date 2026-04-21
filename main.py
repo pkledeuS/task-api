@@ -12,6 +12,7 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:5173",
+    "https://task-frontend-eosin.vercel.app",
 ]
 
 app.add_middleware(
