@@ -1,6 +1,11 @@
 # TaskFlow - Backend (API)
 
 Este es el backend de la aplicación **TaskFlow**, una API RESTful construida con **FastAPI** y **Python**. Proporciona todos los servicios necesarios para la gestión de usuarios (autenticación y autorización) y un CRUD completo para la gestión de tareas, utilizando **PostgreSQL** como base de datos.
+El proyecto se encuentra desplegado en AWS.
+
+## URL de Producción
+
+**Documentación Interactiva (Swagger UI):** [https://taskflowapp.mooo.com/docs](https://taskflowapp.mooo.com/docs)
 
 ## Características principales
 
@@ -18,6 +23,9 @@ Este es el backend de la aplicación **TaskFlow**, una API RESTful construida co
 - [Uvicorn](https://www.uvicorn.org/) (Servidor ASGI)
 - JWT (JSON Web Tokens)
 - Docker & Docker Compose
+- AWS EC2 (Ubuntu 24.04)
+- Nginx (reverse proxy)
+- Let's Encrypt / Certbot (HTTPS)
 
 ## Requisitos Previos
 
